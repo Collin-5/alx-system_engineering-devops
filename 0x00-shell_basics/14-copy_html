@@ -1,0 +1,2 @@
+#!/bin/bash
+cp *.html /home/alx-system_engineering-devops

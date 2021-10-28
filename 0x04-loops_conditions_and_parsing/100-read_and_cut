@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Read file contents
-
 FILE="/etc/passwd"
 
 while read line

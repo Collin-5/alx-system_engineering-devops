@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# infinite loop that displays text stops with ctrl-c
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done

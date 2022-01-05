@@ -2,8 +2,7 @@
 # Installs nginx on server web-01
 # server listens on port 80
 # returns a page with string hello world
-apt-get -y update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /usr/share/nginx/html/index
+sudo apt-get -y update
+sudo apt-get -y install nginx
+echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
 sudo service nginx start

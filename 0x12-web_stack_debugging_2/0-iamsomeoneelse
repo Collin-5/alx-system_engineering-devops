@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# who is the current user
+
+whoami

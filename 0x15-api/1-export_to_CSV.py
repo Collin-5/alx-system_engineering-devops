@@ -10,6 +10,7 @@ from sys import argv
 
 
 def my_csv():
+    """export csv"""
     users = requests.get('https://jsonplaceholder.typicode.com/users')
     for user in users.json():
         if user.get('id') == int(argv[1]):

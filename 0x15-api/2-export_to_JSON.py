@@ -9,6 +9,7 @@ from sys import argv
 
 
 def to_json():
+    """export json"""
     users = requests.get('https://jsonplaceholder.typicode.com/users')
     for user in users.json():
         if user.get('id') == int(argv[1]):

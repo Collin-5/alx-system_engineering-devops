@@ -7,6 +7,7 @@ from sys import argv
 
 
 def show():
+    """display data"""
     users = requests.get('https://jsonplaceholder.typicode.com/users')
     for user in users.json():
         if user.get('id') == int(argv[1]):

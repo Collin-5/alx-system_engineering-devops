@@ -1,44 +1,38 @@
 #!/usr/bin/python3
 """
-requesting data from an api
-export to csv
+Request from API; Return TODO list progress given employee ID
+Export this data to CSV
 """
 import csv
-from fileinput import filename
 import requests
 from sys import argv
 
 
-def my_csv():
-    """export csv"""
-    users = requests.get('https://jsonplaceholder.typicode.com/users')
-    for user in users.json():
-        if user.get('id') == int(argv[1]):
-            EMPLOYEE_NAME = user.get('name')
+def to_csv():
+    """return API data"""
+    users = requests.get("http://jsonplaceholder.typicode.com/users")
+    for u in users.json():
+        if u.get('id') == int(argv[1]):
+            USERNAME = (u.get('username'))
             break
+    TASK_STATUS_TITLE = []
+    todos = requests.get("http://jsonplaceholder.typicode.com/todos")
+    for t in todos.json():
+        if t.get('userId') == int(argv[1]):
+            TASK_STATUS_TITLE.append((t.get('completed'), t.get('title')))
 
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    TASK_COMPLETED_STATUS = []
-    for todo in todos.json():
-        if todo.get('userId') == int(argv[1]):
-            TASK_COMPLETED_STATUS.append((todo.get('completed'),
-                                          todo.get('title')))
-
+    """export to csv"""
     filename = "{}.csv".format(argv[1])
-    with open(filename, 'w') as csvfile:
-        fieldnames = ["USER_ID",
-                      "USERNAME",
-                      "TASK_COMPLETED_STATUS",
-                      "TASK_TITLE"]
+    with open(filename, "w") as csvfile:
+        fieldnames = ["USER_ID", "USERNAME",
+                      "TASK_COMPLETED_STATUS", "TASK_TITLE"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
                                 quoting=csv.QUOTE_ALL)
-
-        for status in TASK_COMPLETED_STATUS:
-            writer.writerow({"USER_ID": argv[1],
-                             "USERNAME": EMPLOYEE_NAME,
-                             "TASK_COMPLETED_STATUS": status[0],
-                             "TASK_TITLE": status[1]})
+        for task in TASK_STATUS_TITLE:
+            writer.writerow({"USER_ID": argv[1], "USERNAME": USERNAME,
+                             "TASK_COMPLETED_STATUS": task[0],
+                             "TASK_TITLE": task[1]})
 
 
-if __name__ == '__main__':
-    my_csv()
+if __name__ == "__main__":
+    to_csv()

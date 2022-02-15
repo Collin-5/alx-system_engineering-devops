@@ -9,3 +9,4 @@ INSERT INTO nexus6 (name) VALUES
 GRANT SELECT ON mysql.user TO 'holberton_user'@'localhost';
 CREATE USER 'replica_user'@'%' IDENTIFIED BY 'password';
 GRANT REPLICATION CLIENT ON *.* TO 'replica_user'@'%'
+GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@'%';

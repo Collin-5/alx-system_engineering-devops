@@ -6,7 +6,7 @@ import sys
 
 
 def top_ten(subreddit):
-    '''gets 10 hottest posts of a subreddit'''
+    '''get 10 posts of a subreddit'''
     headers = {'User-agent': 'test23'}
     url = 'https://www.reddit.com/r/'
     posts = requests.get(url + '{}/hot.json?limit=10'.format(
